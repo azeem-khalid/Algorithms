@@ -1,0 +1,145 @@
+Bubblesort:
+/**
+ * Net beans Project
+ * Java Bubble Sort Implementation
+ * @author K152312
+ */
+public class BubbleSort {
+    //Algorithm
+    public void bubbleSort(int Array[]){
+        for (int i = 0; i < Array.length-1; i++)
+            for (int j = 0; j < Array.length-i-1; j++)
+                if (Array[j] > Array[j+1])
+                {
+                    
+                    int Swap = Array[j];
+                    Array[j] = Array[j+1];
+                    Array[j+1] = Swap;
+                }
+    }
+    public static void printArray(int Array[]){
+        for (int i=0; i<Array.length; ++i)
+            System.out.print(Array[i] + " ");
+        System.out.println();
+    }
+ 
+
+    public static void main(String args[]){
+        BubbleSort bs = new BubbleSort();
+        int arr[] = {64, 34, 25, 12, 22, 11, 90};
+        bs.bubbleSort(arr);
+        System.out.print("Bubble Sorted Array : ");
+        printArray(arr);
+    }
+    
+}
+
+Quicksort:
+/**
+ * Netbeans Project
+ * Java Quick Sort Implementation
+ * @author K152312
+ */
+public class QuickSort {
+    private int Partition(int arr[], int low, int high){
+        
+		int Pivot = arr[high]; 
+	        int i = (low-1);
+	        for (int j=low; j<high; j++){
+			if (arr[j] <= Pivot){
+ 		               i++;
+                               int Swap = arr[i];
+                		arr[i] = arr[j];
+                		arr[j] = Swap;
+            		}
+        	}
+        int Swap = arr[i+1];
+        arr[i+1] = arr[high];
+        arr[high] = Swap;
+        return i+1;
+    }
+    public void QuickSortArray(int arr[], int low, int high){
+        if (low < high){
+            int pi = Partition(arr, low, high);
+            QuickSortArray(arr, low, pi-1);
+            QuickSortArray(arr, pi+1, high);
+       	}
+    } 
+    
+     
+    public static void printArray(int Array[]){
+	for (int i=0; i<Array.length; ++i)
+	        System.out.print(Array[i] + " ");
+	System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int IntArr[] = {64, 34, 25, 12, 22, 11, 90};
+        QuickSort qs = new QuickSort();
+        qs.QuickSortArray(IntArr, 0, IntArr.length-1);
+        System.out.println("Quick Sorted Array: ");
+        printArray(IntArr);
+    }
+}
+
+
+Matrix Chain Order:
+/**
+ * Net beans Project
+ * Matrix Chain Order
+ * @author K152881
+ */
+public class MatrixChainOrder {
+
+    static int MatrixChainOrder(int p[], int i, int j){
+        if (i == j){
+            return 0;
+ 	}
+        
+	int min = Integer.MAX_VALUE;
+        for (int k=i; k<j; k++){
+            int count = MatrixChainOrder(p, i, k) + MatrixChainOrder(p, k+1, j) + p[i-1]*p[k]*p[j];
+            if (count < min){
+        	min = count;
+	    }
+        } 
+        return min;
+    }
+ 
+    public static void main(String args[]){
+        int Array[] = new int[] {2, 2, 2, 4, 3};
+	System.out.println("Minimum number of multiplications is "+ MatrixChainOrder(Array, 1, Array.length-1)); 
+    }
+}
+
+Knapsack:
+/**
+ * Net beans Project
+ * Matrix Chain Order
+ * @author K152881
+ */
+class Knapsack{
+   
+	static int max(int a, int b){
+		return (a > b)? a : b;
+	}
+    
+	static int knapSack(int W, int wt[], int val[], int n){
+    		if (n == 0 || W == 0){
+        		return 0;
+      		}
+
+		if (wt[n-1] > W){
+			return knapSack(W, wt, val, n-1);
+      		}
+		else return max(val[n-1] + knapSack(W-wt[n-1], wt, val, n-1),knapSack(W, wt, val, n-1));
+	}
+
+	public static void main(String args[]){
+        	int Values[] = new int[]{60, 100, 120};
+        	int Weights[] = new int[]{10, 20, 30};
+    		int  W = 50;
+    		System.out.println(knapSack(W, Weights, Values, Values.length));
+    	}
+}
+

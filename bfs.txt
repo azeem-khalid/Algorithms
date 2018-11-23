@@ -1,0 +1,65 @@
+package bfs;
+import java.io.*;
+import java.util.*;
+/**
+*
+* @author Dell
+*/
+class Graphs
+{
+ 	public
+ 	int V;
+ 	LinkedList list[];
+ 	Graphs(int vertex)
+ 	{
+ 		V = vertex;
+ 		list = new LinkedList[vertex];
+ 		for (int i=0; i<vertex; i++)
+ 		list[i] = new LinkedList();
+ 	}
+ 	void add(int edge,int vertex)
+ 	{
+ 		list[vertex].add(edge);
+ 	}
+ 	void BreadthFirstTraversal(int set)
+ 	{
+ 		boolean visited[] = new boolean[V];
+ 		LinkedList<Integer> queue = new LinkedList();
+ 		visited[set]=true;
+ 		queue.add(set);
+ 		while (queue.size() != 0)
+ 		{
+ 			set = queue.poll();
+ 			System.out.print(set+" ");
+ 			Iterator<Integer> i = list[set].listIterator();
+ 			while (i.hasNext())
+ 			{
+				int n = i.next();
+				if (!visited[n])
+ 				{
+ 					visited[n] = true;
+ 					queue.add(n);
+ 				}
+ 			}
+ 		}
+ 	}
+}
+public class BFS {
+ /**
+ * @param args the command line arguments
+ */
+ public static void main(String[] args) {
+ // TODO code application logic here
+
+	 Graphs temp = new Graph(4);
+	 temp.add(0, 1);
+	 temp.add(0, 2);
+	 temp.add(1, 2);
+	 temp.add(2, 1);
+	 temp.add(2, 0);
+	 temp.add(3, 2);
+	 System.out.println("Breadth First Traversal ");
+	 temp.BreadthFirstTraversal(1);
+
+ }
+}
